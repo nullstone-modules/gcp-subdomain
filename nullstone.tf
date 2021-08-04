@@ -13,6 +13,11 @@ data "ns_connection" "domain" {
   type = "domain/gcp"
 }
 
+data "ns_subdomain" "this" {
+  stack_id = data.ns_workspace.this.stack_id
+  block_id = data.ns_workspace.this.block_id
+}
+
 // We will need to be able to support secondary providers since the root domain
 //   is typically managed in a separate account from non-production environments
 provider "google" {
@@ -22,6 +27,7 @@ provider "google" {
 }
 
 locals {
-  domain_name    = data.ns_connection.domain.outputs.name
-  domain_zone_id = data.ns_connection.domain.outputs.zone_id
+  domain_name        = data.ns_connection.domain.outputs.name
+  domain_zone_id     = data.ns_connection.domain.outputs.zone_id
+  domain_nameservers = data.ns_connection.domain.outputs.nameservers
 }
