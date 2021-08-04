@@ -22,7 +22,7 @@ This module automatically works with [gcp-domain](github.com/nullstone-modules/g
 
 - `name: string` - The name of the created subdomain
 - `fqdn: string` - The FQDN (fully-qualified domain name) for the created subdomain
-- `zone_id: string` - Google DNS Managed Zone ID
+- `zone_id: string` - Google DNS Managed Zone ID (format projects/{{project}}/managedZones/{{name}})
 - `nameservers: list(string)` - List of Nameservers for Google DNS Managed Zone
 - `domain_name: string` - The name of the root domain
-- `domain_zone_id: string` - THe zone ID of the root domain
+- `domain_zone_id: string` - The zone ID of the root domain
