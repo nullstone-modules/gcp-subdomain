@@ -18,12 +18,13 @@ data "ns_subdomain" "this" {
   block_id = data.ns_workspace.this.block_id
 }
 
+provider "google" {}
+
 // We will need to be able to support secondary providers since the root domain
 //   is typically managed in a separate account from non-production environments
 provider "google" {
-  credentials = data.ns_connection.domain.outputs.delegator["key_file"]
-
-  alias = "domain"
+  credentials = base64decode(data.ns_connection.domain.outputs.delegator["key_file"])
+  alias       = "domain"
 }
 
 locals {
