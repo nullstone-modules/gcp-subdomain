@@ -16,5 +16,5 @@ locals {
   // output locals
   name        = !local.is_passthrough ? google_dns_managed_zone.this[0].dns_name : local.domain_name
   zone_id     = !local.is_passthrough ? google_dns_managed_zone.this[0].name : local.domain_zone_id
-  nameservers = !local.is_passthrough ? google_dns_managed_zone.this[0].name_servers : local.domain_nameservers
+  nameservers = !local.is_passthrough ? [for ns in google_dns_managed_zone.this[0].name_servers : trimsuffix(ns, ".")] : local.domain_nameservers
 }
