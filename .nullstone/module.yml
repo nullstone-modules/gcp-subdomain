@@ -1,0 +1,13 @@
+org_name: nullstone
+name: gcp-subdomain
+friendly_name: Subdomain
+description: Creates a GCP-managed DNS Zone to manage a subdomain.
+category: subdomain
+subcategory: ""
+provider_types:
+    - gcp
+platform: cloud-dns
+subplatform: ""
+type: ""
+appCategories: []
+is_public: true
