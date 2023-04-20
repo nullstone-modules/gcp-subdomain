@@ -1,6 +1,5 @@
 data "ns_connection" "domain" {
   name     = "domain"
-  type     = "domain/gcp"
   contract = "domain/gcp/cloud-dns"
 }
 
@@ -13,7 +12,8 @@ provider "google" {
 }
 
 locals {
-  domain_name          = data.ns_connection.domain.outputs.name
+  domain_dns_name      = data.ns_connection.domain.outputs.name
+  domain_fqdn          = data.ns_connection.domain.outputs.fqdn
   domain_zone_id       = data.ns_connection.domain.outputs.zone_id
   domain_nameservers   = data.ns_connection.domain.outputs.nameservers
   delegator_key_file   = base64decode(data.ns_connection.domain.outputs.delegator["key_file"])

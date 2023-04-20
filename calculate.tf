@@ -8,13 +8,12 @@ locals {
   env_chunk = var.create_vanity ? "" : "${data.ns_workspace.this.env_name}."
 
   subdomain_chunk = "${local.dns_name_chunk}${local.env_chunk}"
-  subdomain       = trimsuffix(local.subdomain_chunk, ".")
-  fqdn            = "${local.subdomain_chunk}${local.domain_name}"
+  fqdn            = "${local.subdomain_chunk}${local.domain_dns_name}"
 
-  is_passthrough = local.fqdn == local.domain_name
+  is_passthrough = local.fqdn == local.domain_fqdn
 
   // output locals
-  name        = !local.is_passthrough ? google_dns_managed_zone.this[0].dns_name : local.domain_name
+  name        = !local.is_passthrough ? google_dns_managed_zone.this[0].dns_name : local.domain_dns_name
   zone_id     = !local.is_passthrough ? google_dns_managed_zone.this[0].name : local.domain_zone_id
   nameservers = !local.is_passthrough ? [for ns in google_dns_managed_zone.this[0].name_servers : trimsuffix(ns, ".")] : local.domain_nameservers
 }
