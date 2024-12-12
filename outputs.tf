@@ -27,3 +27,13 @@ output "domain_zone_id" {
   value       = local.domain_zone_id
   description = "string ||| The zone ID of the root domain."
 }
+
+output "certificate_id" {
+  value       = local.certificate_id
+  description = "string ||| The ID of the Certificate in GCP Certificate Manager."
+}
+
+output "certificate_map_id" {
+  value       = local.certificate_map_id
+  description = "string ||| The ID of the Certificate Map in GCP Certificate Manager."
+}
