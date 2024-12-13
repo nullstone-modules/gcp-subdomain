@@ -7,3 +7,9 @@ If dns-name is set to '.' and create_vanity is enabled, this will module act as 
 EOF
   default     = false
 }
+
+variable "disable_certificate" {
+  type        = bool
+  default     = false
+  description = "Specify true to disable SSL certificate creation"
+}

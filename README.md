@@ -4,25 +4,23 @@ Nullstone module to create a subdomain on GCP.
 
 ## Overview
 
-This module creates a DNS Zone which follows a contract to administer through Nullstone.
-This module automatically works with [gcp-domain](github.com/nullstone-modules/gcp-domain).
+This module creates a DNS Zone on Google Cloud DNS.
 
-## Connections
+By default, this module will create an SSL certificate using GCP Certificate Manager.
+This can be disabled by setting the variable `disable_certificate = true`.
+This certificate is created for Cloud CDNs and Load Balancing (most common use case).
+A certificate and certificate map are created and emitted as outputs for use to attach to a GCP Load Balancer.
 
-- `domain (type=domain/gcp)`
-    - Example: [gcp-domain](github.com/nullstone-modules/gcp-domain)
+## Subdomain Calculation
 
-## Variables
+This module adds the current Nullstone environment into the FQDN for the resulting subdomain.
 
-(The nullstone block contains the subdomain name.)
+#### Example
+  Domain:     `acme.com`
+  Env:        `dev`
+  `dns_name`: `api`
+  FQDN:       `api.dev.acme.com`
 
-- `create_vanity: bool (default: false)` - Enable this to create a vanity subdomain instead of environmental. This is typically enabled on the production environment.
-
-## Outputs
-
-- `name: string` - The name of the created subdomain
-- `fqdn: string` - The FQDN (fully-qualified domain name) for the created subdomain
-- `zone_id: string` - Google DNS Managed Zone ID (format projects/{{project}}/managedZones/{{name}})
-- `nameservers: list(string)` - List of Nameservers for Google DNS Managed Zone
-- `domain_name: string` - The name of the root domain
-- `domain_zone_id: string` - The zone ID of the root domain
+If `var.create_vanity = true`, then the environment chunk is omitted from the FQDN.
+In the above example, the FQDN becomes: `api.acme.com`.
+Typically, enabling this variable is done to create a production URL.
