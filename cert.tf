@@ -1,25 +1,19 @@
-locals {
-  purpose_to_scopes = {
-    "cdn" : "EDGE_CACHE"
-    "load-balancer" : "ALL_REGIONS"
-    "internal" : "DEFAULT"
-  }
-}
-
 module "cert" {
-  source = "nullstone-modules/sslcert/gcp"
+  source  = "nullstone-modules/sslcert/gcp"
+  version = "~> 0.1.0"
 
   enabled = !var.disable_certificate
   name    = local.resource_name
   labels  = local.labels
-  scope   = local.purpose_to_scopes[var.certificate_purpose]
+  scope   = ""
 
   subdomains = {
-    (local.name) = local.zone_id
+    (local.dns_name) = local.zone_id
   }
 }
 
 locals {
-  certificate_id     = module.cert.certificate_id
-  certificate_map_id = module.cert.certificate_map_id
+  certificate_id       = module.cert.certificate_id
+  certificate_map_id   = module.cert.certificate_map_id
+  certificate_map_name = module.cert.certificate_map_name
 }
