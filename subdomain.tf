@@ -11,8 +11,8 @@ locals {
   // created_zone_id refers to google_dns_managed_zone.this.name; however, we need this variable to wait on the resource to be created
   // We're going to take google_dns_managed_zone.this.id and parse out the name (since id is computed during creation)
   // Format: projects/{{project}}/managedZones/{{name}}
-  created_zone_id = try(regex("^projects/[^/]+/managedZones/([^/]+)$", google_dns_managed_zone.this[0].id)[0], "")
-  created_name = try(trimsuffix(google_dns_managed_zone.this[0].dns_name, "."), "")
+  created_zone_id     = try(regex("^projects/[^/]+/managedZones/([^/]+)$", google_dns_managed_zone.this[0].id)[0], "")
+  created_name        = try(trimsuffix(google_dns_managed_zone.this[0].dns_name, "."), "")
   created_nameservers = [for ns in try(google_dns_managed_zone.this[0].name_servers, []) : trimsuffix(ns, ".")]
 
   subdomain_name        = local.is_passthrough ? local.domain_dns_name : local.created_name
