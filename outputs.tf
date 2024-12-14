@@ -1,5 +1,5 @@
 output "name" {
-  value       = local.dns_name
+  value       = local.subdomain_name
   description = "string ||| The name of the created subdomain. (Format: '{{dns_name}}[.{{env}}].{{domain}}')"
 }
 
@@ -9,12 +9,12 @@ output "fqdn" {
 }
 
 output "zone_id" {
-  value       = local.zone_id
+  value       = local.subdomain_zone_id
   description = "string |||  Google DNS Managed Zone ID (Format: projects/{{project}}/managedZones/{{name}})."
 }
 
 output "nameservers" {
-  value       = local.nameservers
+  value       = local.subdomain_nameservers
   description = "list(string) ||| List of Nameservers for Google DNS Managed Zone."
 }
 

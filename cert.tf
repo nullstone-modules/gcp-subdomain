@@ -8,7 +8,7 @@ module "cert" {
   scope   = ""
 
   subdomains = {
-    (local.dns_name) = local.zone_id
+    (local.subdomain_name) = local.subdomain_zone_id
   }
 }
 

@@ -1,3 +1,7 @@
+# 0.3.1 (Dec 14, 2024)
+* Pull subdomain info from Nullstone instead of calculating.
+* Upgrade `ns` terraform provider.
+
 # 0.3.0 (Dec 13, 2024)
 * Added SSL certificate and certificate map.
 * Added terraform lockfile.
