@@ -1,3 +1,6 @@
+# 0.3.2 (Dec 14, 2024)
+* Added optional `certificate` connection for importing an SSL certificate.
+
 # 0.3.1 (Dec 14, 2024)
 * Pull subdomain info from Nullstone instead of calculating.
 * Upgrade `ns` terraform provider.
