@@ -1,4 +1,4 @@
-# 0.3.2 (Dec 14, 2024)
+# 0.3.2 (Dec 19, 2024)
 * Added optional `certificate` connection for importing an SSL certificate.
 
 # 0.3.1 (Dec 14, 2024)
