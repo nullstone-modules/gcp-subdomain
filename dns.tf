@@ -5,7 +5,7 @@ resource "google_project_service" "dns" {
 }
 
 resource "google_dns_managed_zone" "this" {
-  name     = local.block_ref
+  name     = local.resource_name
   dns_name = local.fqdn
   labels   = local.labels
   count    = !local.is_passthrough ? 1 : 0
