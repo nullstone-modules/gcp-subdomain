@@ -8,13 +8,14 @@ locals {
   // If we detect that the certificate is a wildcard (e.g. `*.acme.com`), we need to flatten our subdomains
   // This is because an SSL cert on `*.acme.com` will not work for `a.b.acme.com`
   // To flatten our subdomain, we're going to replace all `.` with `-` in the `subdomain_name` (i.e. the subdomain fqdn without the domain suffix)
-  needs_flattened = anytrue([for domain in local.certificate_domains : strcontains(domain, "*")])
+  // This detection only works when using an external certificate with `ns_connection.certificate`
+  needs_flattened = anytrue([for domain in local.ext_certificate_domains : strcontains(domain, "*")])
   // Normally, we rely on ns_subdomain to construct the fqdn
   // However, if we're flattening, we need to manually construct it
   // It should look like this: replace(subdomain_name, ".", "-") + "." + domain_name + "."
   flattened_fqdn = "${replace(data.ns_subdomain.this.subdomain_name, ".", "-")}.${data.ns_subdomain.this.domain_name}."
   fqdn           = local.needs_flattened ? local.flattened_fqdn : data.ns_subdomain.this.fqdn
-  is_passthrough = local.fqdn == local.domain_fqdn
+  is_passthrough = data.ns_subdomain.this.subdomain_name == ""
 
   // created_zone_id refers to google_dns_managed_zone.this.name; however, we need this variable to wait on the resource to be created
   // We're going to take google_dns_managed_zone.this.id and parse out the name (since id is computed during creation)

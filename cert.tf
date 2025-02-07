@@ -8,7 +8,7 @@ locals {
   ext_certificate_id       = try(data.ns_connection.certificate.outputs.certificate_id, "")
   ext_certificate_map_id   = try(data.ns_connection.certificate.outputs.certificate_map_id, "")
   ext_certificate_map_name = try(data.ns_connection.certificate.outputs.certificate_map_name, "")
-  ext_certificate_domains  = try(data.ns_connection.certificate.outputs.certificate_domains, "")
+  ext_certificate_domains  = try(data.ns_connection.certificate.outputs.certificate_domains, [])
 
   create_cert = !var.disable_certificate && local.ext_certificate_map_id == ""
 }
