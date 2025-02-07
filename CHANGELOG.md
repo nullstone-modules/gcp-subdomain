@@ -1,3 +1,6 @@
+# 0.3.4 (Feb 07, 2025)
+* Flatten subdomain if using a wildcard certificate.
+
 # 0.3.3 (Jan 27, 2025)
 * Add a random string to the end of the managed zone name so it is always unique.
 

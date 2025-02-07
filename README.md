@@ -24,3 +24,14 @@ This module adds the current Nullstone environment into the FQDN for the resulti
 If `var.create_vanity = true`, then the environment chunk is omitted from the FQDN.
 In the above example, the FQDN becomes: `api.acme.com`.
 Typically, enabling this variable is done to create a production URL.
+
+## Wildcard Certificate
+
+If this module detects that you are using a certificate with a wildcard subdomain, it will flatten the above subdomain calculation.
+
+#### Example
+  Certificate Domain: `*.acme.com`
+  Domain:     `acme.com`
+  Env:        `dev`
+  `dns_name`: `api`
+  FQDN:       `api-dev.acme.com`
