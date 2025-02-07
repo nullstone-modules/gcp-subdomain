@@ -13,3 +13,13 @@ variable "disable_certificate" {
   default     = false
   description = "Specify true to disable SSL certificate creation"
 }
+
+variable "skip_delegation" {
+  type        = bool
+  default     = false
+  description = <<EOF
+Enable skip_delegation to prevent creating a GCP DNS zone dedicated to this subdomain.
+This is useful when two subdomains in Nullstone collide (e.g. `a.b.domain.com` and `b.domain.com`).
+By enabling, all subsequent DNS records are stored in the root domain DNS zone `domain.com`.
+EOF
+}
