@@ -8,6 +8,7 @@ locals {
   ext_certificate_id       = try(data.ns_connection.certificate.outputs.certificate_id, "")
   ext_certificate_map_id   = try(data.ns_connection.certificate.outputs.certificate_map_id, "")
   ext_certificate_map_name = try(data.ns_connection.certificate.outputs.certificate_map_name, "")
+  ext_certificate_domains  = try(data.ns_connection.certificate.outputs.certificate_domains, "")
 
   create_cert = !var.disable_certificate && local.ext_certificate_map_id == ""
 }
@@ -32,4 +33,5 @@ locals {
   certificate_id       = coalesce(local.ext_certificate_id, module.cert.certificate_id)
   certificate_map_id   = coalesce(local.ext_certificate_map_id, module.cert.certificate_map_id)
   certificate_map_name = coalesce(local.ext_certificate_map_name, module.cert.certificate_map_name)
+  certificate_domains  = coalesce(local.ext_certificate_domains, module.cert.certificate_domains)
 }
