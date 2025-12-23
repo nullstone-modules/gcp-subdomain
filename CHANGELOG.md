@@ -1,3 +1,6 @@
+# 0.4.0 (Dec 23, 2025)
+* Changed domain delegator to use keyfile or impersonation.
+
 # 0.3.4 (Feb 07, 2025)
 * Flatten subdomain if using a wildcard certificate.
 
